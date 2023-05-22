@@ -1,1 +1,5 @@
-Trim ColumnName => inside foreach -type argument<Datacolumn> Dt.Columns(item.tostring).columnName= item.tostring.trim
+Trim ColumnName 
+=> Dt.Columns("ColumnName").columnName= item.tostring.trim
+
+remove duplicate Row based on specific column 
+=> dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
