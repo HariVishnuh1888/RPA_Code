@@ -2,4 +2,4 @@ Trim ColumnName
 => Dt.Columns("ColumnName").columnName= item.tostring.trim
 
 remove duplicate Row based on specific column 
-=> dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
+=>dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
