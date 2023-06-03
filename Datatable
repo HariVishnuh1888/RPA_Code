@@ -58,3 +58,6 @@ Invoke Code Activity:
  For Each row In dt_Input_1.Rows
 	row("New")=row("Symbol").tostring
 	Next
+
+>>>> To remove Empty row in Dt using Linq
+	dt_Input_1.Rows.Cast(of DataRow)().Where(Function(row)row.itemArray.All(Function(x)x.ToString.Equals(""))).copyTodatatable()
