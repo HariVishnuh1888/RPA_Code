@@ -3,3 +3,20 @@ Trim ColumnName
 
 remove duplicate Row based on specific column 
 =>dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
+
+linq: where condition
+  (From row In dt_Input
+  Where CInt(row("Volume"))=0
+  Select row
+  ).copytoDatatable()
+
+Linq: Group by
+  (From row In dt_Input.AsEnumerable()
+  Group row By x=row("Name") Into grp= Group
+  Select grp.first).copytoDatatable()
+
+Linq: Order By descending/ascending
+  (From row In dt_Input.AsEnumerable()
+  Order By row("Name") Descending
+  Select row).copytoDatatable()
+  
