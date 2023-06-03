@@ -40,6 +40,7 @@ Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
  Select dt_Input_1.Clone().Rows.add(A,B)).CopyToDataTable()
  
 >>>>>lINQ: TO Update one column value based on other column""""" if we have more column" we prefer vb.net 
+>>>inside the Invoke Code Activity:
 
  dt_Input_1.AsEnumerable().
  Where(Function(row) row("Name").ToString.Trim.ToUpper.Equals("VISHNU")).ToList().
@@ -48,3 +49,12 @@ Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
  	row("age")="30"
  End Sub
  )
+  
+>>>>> Add new column in the dt, and setting value for the Column
+
+Invoke Code Activity:
+ Dim row As DataRow
+ dt_Input_1.Columns.Add("New")
+ For Each row In dt_Input_1.Rows
+	row("New")=row("Symbol").tostring
+	Next
