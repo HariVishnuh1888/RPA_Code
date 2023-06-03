@@ -25,5 +25,10 @@ dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y
   (From row In dt_Input.AsEnumerable()
   Order By row("Name") Descending, row("Age") descending
   Select row).copytoDatatable()
-  
-  
+
+>>>>>>>> Linq: Inner Join datatable with conditions
+  (From A In dt_Input_1
+Join B In dt_Input_2
+On A("Name").tostring Equals B("Names").tostring
+Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
+).copytoDatatable()
