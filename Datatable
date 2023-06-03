@@ -45,6 +45,6 @@ Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
  Where(Function(row) row("Name").ToString.Trim.ToUpper.Equals("VISHNU")).ToList().
  ForEach
  ( Sub(row)
- 	row("age")=row("Name").ToString+"and"+row("age").ToString
+ 	row("age")="30"
  End Sub
  )
