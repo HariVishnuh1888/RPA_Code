@@ -32,3 +32,19 @@ Join B In dt_Input_2
 On A("Name").tostring Equals B("Names").tostring
 Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
 ).copytoDatatable()
+
+>>>>>>lINQ: TO Update one column value based on other column>""""If small columns in sheet"""
+ (From row In dt_Input_1
+ Let A= row("Name").tostring
+ Let B=If(A.toUpper.equals("VISHNU"),"30",row("age").tostring)
+ Select dt_Input_1.Clone().Rows.add(A,B)).CopyToDataTable()
+ 
+>>>>>lINQ: TO Update one column value based on other column""""" if we have more column" we prefer vb.net 
+
+ dt_Input_1.AsEnumerable().
+ Where(Function(row) row("Name").ToString.Trim.ToUpper.Equals("VISHNU")).ToList().
+ ForEach
+ ( Sub(row)
+ 	row("age")=row("Name").ToString+"and"+row("age").ToString
+ End Sub
+ )
