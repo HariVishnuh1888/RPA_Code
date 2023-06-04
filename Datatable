@@ -61,3 +61,7 @@ Invoke Code Activity:
 
 >>>> To remove Empty row in Dt using Linq
 	dt_Input_1.Rows.Cast(of DataRow)().Where(Function(row) not row.itemArray.All(Function(x)x.ToString.Equals(""))).copyTodatatable()
+	
+	
+>>>> Datatable to Dictionary: linq
+	dt_Input_1.AsEnumerable.ToDictionary(Function (key)key("Name").ToString,Function (key)key("Age").ToString)
