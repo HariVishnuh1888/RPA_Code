@@ -75,3 +75,19 @@ Invoke Code Activity:
 	Where(Function(row2) row2("Names").ToString.Trim.ToUpper.Equals(row("Name").ToString.Trim.ToUpper)).ToList()
 	Let A2=If(A.count>0,A(0)(1),"")
 	Select dt_Input_1.Clone().Rows.Add(row("Name"),A2)).CopyToDataTable
+	
+>>>>>>>>Fill the blank cell with the value from above cell(even if the First row have empty then need to mention emtpy )
+	(From row In dt_Input_1.AsEnumerable
+	Let A=If(String.IsNullOrEmpty(row("Name").ToString),
+					If(dt_Input_1.Rows.IndexOf(row)=0,"empty",
+						dt_Input_2.Rows(dt_Input_1.Rows.IndexOf(row)-1)(0)),
+							(row)("Name").ToString)
+	Let B=If(String.IsNullOrEmpty(row("Age").ToString),
+					If(dt_Input_1.Rows.IndexOf(row)=0,"empty",
+						dt_Input_2.Rows(dt_Input_1.Rows.IndexOf(row)-1)(1)),
+						row("Age").ToString)
+	Let C=If(String.IsNullOrEmpty(row("Check").ToString),
+					If(dt_Input_1.Rows.IndexOf(row)=0,"empty",
+							dt_Input_2.Rows(dt_Input_1.Rows.IndexOf(row)-1)(2)),
+								row("Check").ToString)
+	Select dt_Input_2.rows.Add(A,B,C)).copyTodatatable()
