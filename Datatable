@@ -1,61 +1,61 @@
 >>>>Trim ColumnName
- Dt.Columns("ColumnName").columnName= item.tostring.trim
+ 	Dt.Columns("ColumnName").columnName= item.tostring.trim
 
 >>>>>>remove duplicate Row based on specific column 
-dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
+	dt.AsEnumerable().GroupBy(Function(x)x("ColumnName").ToString).Select(Function(y)y.First()).CopytoDatatable()
 
 >>>>>>linq: where condition
-  (From row In dt_Input
-  Where CInt(row("Volume"))=0
-  Select row
-  ).copytoDatatable()
+	  (From row In dt_Input
+	  Where CInt(row("Volume"))=0
+	  Select row
+	  ).copytoDatatable()
 
 >>>>>>>>>Linq: Group by
-  (From row In dt_Input.AsEnumerable()
-  Group row By x=row("Name") Into grp= Group
-  Select grp.first).copytoDatatable()
+	  (From row In dt_Input.AsEnumerable()
+	  Group row By x=row("Name") Into grp= Group
+	  Select grp.first).copytoDatatable()
 
 >>>>>>> Linq : Order by 
-  (From row In dt_Input.AsEnumerable()
-  Order By row("Name") Descending
-  Select row).copytoDatatable()
+	  (From row In dt_Input.AsEnumerable()
+	  Order By row("Name") Descending
+	  Select row).copytoDatatable()
 
   =>if you want to order by with both column  like first order by name column then order by next column ucan achieve with this
 
-  (From row In dt_Input.AsEnumerable()
-  Order By row("Name") Descending, row("Age") descending
-  Select row).copytoDatatable()
+	  (From row In dt_Input.AsEnumerable()
+	  Order By row("Name") Descending, row("Age") descending
+	  Select row).copytoDatatable()
 
 >>>>>>>> Linq: Inner Join datatable with conditions
-  (From A In dt_Input_1
-Join B In dt_Input_2
-On A("Name").tostring Equals B("Names").tostring
-Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
-).copytoDatatable()
+	(From A In dt_Input_1
+	Join B In dt_Input_2
+	On A("Name").tostring Equals B("Names").tostring
+	Select dt_Input_3.Rows.Add({A("Name"),B("Names"),B("ages")})
+	).copytoDatatable()
 
 >>>>>>lINQ: TO Update one column value based on other column>""""If small columns in sheet"""
- (From row In dt_Input_1
- Let A= row("Name").tostring
- Let B=If(A.toUpper.equals("VISHNU"),"30",row("age").tostring)
- Select dt_Input_1.Clone().Rows.add(A,B)).CopyToDataTable()
+	 (From row In dt_Input_1
+	 Let A= row("Name").tostring
+	 Let B=If(A.toUpper.equals("VISHNU"),"30",row("age").tostring)
+	 Select dt_Input_1.Clone().Rows.add(A,B)).CopyToDataTable()
  
 >>>>>lINQ: TO Update one column value based on other column""""" if we have more column" we prefer vb.net 
 >>>inside the Invoke Code Activity:
 
- dt_Input_1.AsEnumerable().
- Where(Function(row) row("Name").ToString.Trim.ToUpper.Equals("VISHNU")).ToList().
- ForEach
- ( Sub(row)
- 	row("age")="30"
- End Sub
- )
+	 dt_Input_1.AsEnumerable().
+	 Where(Function(row) row("Name").ToString.Trim.ToUpper.Equals("VISHNU")).ToList().
+	 ForEach
+	 ( Sub(row)
+		row("age")="30"
+	 End Sub
+	 )
   
 >>>>> Add new column in the dt, and setting value for the Column
 
 Invoke Code Activity:
- Dim row As DataRow
- dt_Input_1.Columns.Add("New")
- For Each row In dt_Input_1.Rows
+	Dim row As DataRow
+ 	dt_Input_1.Columns.Add("New")
+ 	For Each row In dt_Input_1.Rows
 	row("New")=row("Symbol").tostring
 	Next
 
@@ -65,3 +65,13 @@ Invoke Code Activity:
 	
 >>>> Datatable to Dictionary: linq
 	dt_Input_1.AsEnumerable.ToDictionary(Function (key)key("Name").ToString,Function (key)key("Age").ToString)
+
+>>>>>> Reverse Datatable in linq"
+	dt_Input_1.AsEnumerable.Reverse().CopyToDataTable
+
+>>>>>Lookup in LInq
+	(From row In dt_Input_1.AsEnumerable
+	Let A= dt_Input_2.AsEnumerable().
+	Where(Function(row2) row2("Names").ToString.Trim.ToUpper.Equals(row("Name").ToString.Trim.ToUpper)).ToList()
+	Let A2=If(A.count>0,A(0)(1),"")
+	Select dt_Input_1.Clone().Rows.Add(row("Name"),A2)).CopyToDataTable
