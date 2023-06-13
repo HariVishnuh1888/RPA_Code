@@ -80,10 +80,7 @@ Invoke Code Activity:
 	(From row In dt_Input_1.AsEnumerable
 	Let A=If(String.IsNullOrEmpty(row("Name").ToString),
 					If(dt_Input_1.Rows.IndexOf(row)=0,"empty",
-					
-					
->>>That is ll
-						dt_Input_2.Rows(dt_Input_1.Rows.IndexOf(row)-1)(0)),
+					dt_Input_2.Rows(dt_Input_1.Rows.IndexOf(row)-1)(0)),
 							(row)("Name").ToString)
 	Let B=If(String.IsNullOrEmpty(row("Age").ToString),
 					If(dt_Input_1.Rows.IndexOf(row)=0,"empty",
